@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ImagenesController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +21,5 @@ Route::get('/', function () {
 
 
 Route::get('/imagenes',[ImagenesController::class,'index'])->name('imagenes.index');
+
+Route::get('/post',[PostController::class,'index'])->name('post.index');
