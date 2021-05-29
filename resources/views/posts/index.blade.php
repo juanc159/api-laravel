@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','Api Imagenes')
+@section('title','Api Post')
 
 @section('content')
 

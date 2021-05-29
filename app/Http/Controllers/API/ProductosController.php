@@ -31,7 +31,7 @@ class ProductosController extends Controller
         return response()->json([
             'data' => ProductosModel::create($request->all()),
             'res' => true,
-            'msg' => 'guardado con exito'
+            'msg' => 'Guardado con exito'
         ]);
     }
 
@@ -43,11 +43,12 @@ class ProductosController extends Controller
      */
     public function show($producto)
     {
-        return response()->json([
+        /*return response()->json([
             'data' => ProductosModel::find($producto),
             'res' => true,
-            'msg' => 'guardado con exito'
-        ]);
+            'msg' => 'Mostrado con exito'
+        ]);*/
+        return ProductosModel::find($producto);
     }
 
     /**
@@ -78,7 +79,7 @@ class ProductosController extends Controller
         return response()->json([
             'data' => $producto->delete(),
             'res' => true,
-            'msg' => 'Actualizado con exito'
+            'msg' => 'Eliminado con exito'
         ]);
     }
 }

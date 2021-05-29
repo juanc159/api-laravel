@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\API\ProductosController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\VarDumper\Caster\AmqpCaster;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,12 +17,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+/*Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
-});
+});*/
 
-Route::get('productos', [ProductosController::class,'index']);
+//rutas publicas
 Route::get('productos/{producto}', [ProductosController::class,'show']);
-Route::post('productos', [ProductosController::class,'store']);
-Route::put('productos/{producto}', [ProductosController::class,'update']);
-Route::delete('productos/{producto}', [ProductosController::class,'destroy']);
+Route::get('productos', [ProductosController::class,'index']);
+Route::post('/register', [AuthController::class,'register']);
+Route::post('/login', [AuthController::class,'login']);
+
+
+
+//rutas protegidas
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::post('logout',[AuthController::class,'logout']);
+    Route::post('productos', [ProductosController::class,'store']);
+    Route::put('productos/{producto}', [ProductosController::class,'update']);
+    Route::delete('productos/{producto}', [ProductosController::class,'destroy']);
+});
